@@ -102,7 +102,9 @@
 // Load profile from backend
 async function loadProfile() {
   try {
-    const response = await fetch("http://localhost:8080/api/profile");
+    const response = await fetch("http://localhost:8080/api/profile", {
+      credentials: "include"
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

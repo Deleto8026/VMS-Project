@@ -6,6 +6,13 @@ CREATE TABLE users (
   email VARCHAR(200),
   password VARCHAR(255),
   photo VARCHAR(255),
+  phone VARCHAR(25),
+  birth_date DATE,
+  address VARCHAR(200),
+  city VARCHAR(100),
+  state VARCHAR(100),
+  zip VARCHAR(25),
+  bio TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
