@@ -28,7 +28,26 @@ public class AuthController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/signup") //Dima - "I'll add signup part in the next week"
+    @PostMapping("/signup")
+    public ResponseEntity<AuthResponse> signup(@RequestBody User user) {
+
+        // Check all fields are filled
+        if (user.getFirstName() == null || user.getFirstName().isBlank() ||
+            user.getLastName() == null || user.getLastName().isBlank() ||
+            user.getUsername() == null || user.getUsername().isBlank() ||
+            user.getEmail() == null || user.getEmail().isBlank() ||
+            user.getPassword() == null || user.getPassword().isBlank()) {
+
+            return ResponseEntity.badRequest()
+                    .body(new AuthResponse(false, "All fields are required."));
+        }
+
+        // Save user to database
+        userRepository.save(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new AuthResponse(true, "Account created successfully."));
+    }
 
     // This method handles login requests from the frontend
     // It listens to POST requests at /api/auth/login

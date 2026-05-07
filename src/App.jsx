@@ -9,10 +9,39 @@ import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import Logout from "./pages/Logout"
 import { Routes, Route, useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { signupUser } from "./services/authService"
 
 // Signup Page
 function SignupPage() {
   const navigate = useNavigate()
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+  })
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async () => {
+    if (!formData.firstName || !formData.lastName || !formData.username || !formData.email || !formData.password) {
+      alert("Please fill in all fields.")
+      return
+    }
+
+    const data = await signupUser(formData)
+
+    if (data.success) {
+      navigate("/confirmation")
+    } else {
+      alert(data.message || "Signup failed.")
+    }
+  }
 
   return (
     <>
@@ -28,17 +57,17 @@ function SignupPage() {
           <h1 className="call-to-action">Create an Account</h1>
 
           <div>
-            <input className="signup-page-input" placeholder="First Name" />
-            <input className="signup-page-input" placeholder="Last Name" />
-            <input className="signup-page-input" placeholder="Username" />
-            <input className="signup-page-input" placeholder="E-mail" />
-            <input className="signup-page-input" placeholder="Password" />
+            <input className="signup-page-input" placeholder="First Name" name="firstName" onChange={handleChange} />
+            <input className="signup-page-input" placeholder="Last Name" name="lastName" onChange={handleChange} />
+            <input className="signup-page-input" placeholder="Username" name="username" onChange={handleChange} />
+            <input className="signup-page-input" placeholder="E-mail" name="email" onChange={handleChange} />
+            <input className="signup-page-input" placeholder="Password" type="password" name="password" onChange={handleChange} />
           </div>
 
           <button
             type="button"
             className="sign-up"
-            onClick={() => navigate("/confirmation")}
+            onClick={handleSubmit}
           >
             Sign Up
           </button>

@@ -45,4 +45,19 @@ public class UserRepository {
         // Return first user if found, otherwise null
         return users.isEmpty() ? null : users.get(0);
     }
+
+    // Insert new user into database
+    public void save(User user) {
+        String sql = "INSERT INTO users (first_name, last_name, username, email, password) " +
+                    "VALUES (?, ?, ?, ?, ?)";
+
+        jdbcTemplate.update(
+            sql,
+            user.getFirstName(),
+            user.getLastName(),
+            user.getUsername(),
+            user.getEmail(),
+            user.getPassword()
+        );
+    }
 }

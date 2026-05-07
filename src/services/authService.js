@@ -44,3 +44,25 @@ export async function logoutUser() {
     };
   }
 }
+//dima - sign up method
+export async function signupUser(formData) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Signup request failed:", error);
+    return {
+      success: false,
+      message: "Unable to connect to the server.",
+    };
+  }
+}
