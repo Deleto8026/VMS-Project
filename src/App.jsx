@@ -1,5 +1,5 @@
 import './App.css'
-import NavbarLogo from './components/navbarLogo'
+import Navbar from './components/navbar'
 import Footer from './components/footer'
 import Events from "./pages/Events"
 import Details from "./pages/Details"
@@ -80,7 +80,7 @@ function SignupPage() {
 function App() {
   return (
     <div className="app-container">
-      <NavbarLogo />
+      <Navbar></Navbar>
 
       <main className="main-content">
         <Routes>
