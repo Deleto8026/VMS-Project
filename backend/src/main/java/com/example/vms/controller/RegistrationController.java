@@ -4,7 +4,7 @@ import com.example.vms.model.Registration;
 import com.example.vms.repository.RegistrationRepository;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
 @RestController
 @RequestMapping("/api")
 public class RegistrationController {
@@ -21,4 +21,3 @@ public class RegistrationController {
         return "Registered successfully";
     }
 }
-

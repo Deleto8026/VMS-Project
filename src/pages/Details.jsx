@@ -46,21 +46,21 @@ function Details() {
     }
 
     fetch("http://localhost:8080/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        eventId: Number(id),
-        userName: user.username || user.email || user.id,
-      }),
-    })
-      .then((res) => res.text())
-      .then((data) => alert(data))
-      .catch((err) => {
-        console.log(err)
-        alert("Registration failed")
-      })
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    eventId: Number(id),
+    userName: user.username || user.email || user.id,
+  }),
+})
+  .then((res) => res.text())
+  .then(() => navigate("/registration-success"))
+  .catch((err) => {
+    console.log(err)
+    alert("Registration failed")
+  })
   }
 
   if (!event) return <h2>Event not found</h2>

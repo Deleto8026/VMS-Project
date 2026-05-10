@@ -11,7 +11,7 @@ import Logout from "./pages/Logout"
 import { Routes, Route, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { signupUser } from "./services/authService"
-
+import RegistrationSuccess from "./pages/RegistrationSuccess"
 // Signup Page
 function SignupPage() {
   const navigate = useNavigate()
@@ -92,6 +92,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/confirmation" element={<Confirmation />} />
+          <Route path="/registration-success" element={<RegistrationSuccess />} />
         </Routes>
       </main>
 
