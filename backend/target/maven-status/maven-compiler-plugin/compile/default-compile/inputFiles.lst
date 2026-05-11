@@ -1,7 +1,0 @@
-/Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/VmsApplication.java
-/Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/config/CorsConfig.java
-/Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/controller/AuthController.java
-/Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/dto/AuthResponse.java
-/Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/dto/LoginRequest.java
-/Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/model/User.java
-/Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/repository/UserRepository.java

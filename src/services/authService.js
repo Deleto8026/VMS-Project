@@ -67,3 +67,26 @@ export async function signupUser(formData) {
     };
   }
 }
+
+//dima - verifies user's 6-digit code during sign up
+export async function verifyUser(email, code) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/verify`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ email, code }),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Verification request failed:", error);
+    return {
+      success: false,
+      message: "Unable to connect to the server.",
+    };
+  }
+}

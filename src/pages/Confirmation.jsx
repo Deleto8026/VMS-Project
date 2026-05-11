@@ -1,7 +1,29 @@
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { useLocation } from "react-router-dom"
+import { verifyUser } from "../services/authService"
 
 function Confirmation() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const email = location.state?.email
+
+  const [code, setCode] = useState("")
+
+  const handleConfirm = async () => {
+    if (code.length !== 6) {
+      alert("Please enter the 6-digit code.")
+      return
+    }
+
+    const data = await verifyUser(email, code)
+
+    if (data.success) {
+      navigate("/events")
+    } else {
+      alert(data.message || "Invalid code. Please try again.")
+    }
+  }
 
   return (
     <div className="signup-confirmation-container">
@@ -25,11 +47,13 @@ function Confirmation() {
         pattern="[0-9]*"
         autoComplete="one-time-code"
         maxLength={6}
+        value={code}
+        onChange={(e) => setCode(e.target.value)}
       />
 
       <button
         className="confirm-code"
-        onClick={() => navigate("/events")}
+        onClick={handleConfirm}
       >
         Confirm
       </button>
