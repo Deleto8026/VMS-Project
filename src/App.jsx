@@ -28,14 +28,60 @@ function SignupPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async () => { //makes sure the user can't enter random inputs
+    //checks if all fields are filled
     if (!formData.firstName || !formData.lastName || !formData.username || !formData.email || !formData.password) {
       alert("Please fill in all fields.")
       return
     }
-
+  
+    //first name and last name: letters only
+    const nameRegex = /^[a-zA-Z]+$/
+    if (!nameRegex.test(formData.firstName) || !nameRegex.test(formData.lastName)) {
+      alert("First and last name can only contain letters.")
+      return
+    }
+  
+    //username: 5 to 25 characters, letters/numbers/underscores only, no spaces
+    const usernameRegex = /^[a-zA-Z0-9_]{5,25}$/
+    if (!usernameRegex.test(formData.username)) {
+      alert("Username must be 3-25 characters and can only contain letters, numbers, and underscores. No spaces.")
+      return
+    }
+  
+    //common email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      alert("Please enter a valid email address.")
+      return
+    }
+  
+    //password: at least 8 characters
+    if (formData.password.length < 8) {
+      alert("Password must be at least 8 characters.")
+      return
+    }
+  
+    //password:at least one uppercase letter
+    if (!/[A-Z]/.test(formData.password)) {
+      alert("Password must contain at least one uppercase letter.")
+      return
+    }
+  
+    //password: at least one number
+    if (!/[0-9]/.test(formData.password)) {
+      alert("Password must contain at least one number.")
+      return
+    }
+  
+    //password: at least one symbol
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(formData.password)) {
+      alert("Password must contain at least one symbol.")
+      return
+    }
+  
     const data = await signupUser(formData)
-
+  
     if (data.success) {
       navigate("/confirmation")
     } else {
