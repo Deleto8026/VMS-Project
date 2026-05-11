@@ -107,3 +107,60 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+.confirmation-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.confirmation-card {
+  background: white;
+  padding: 40px;
+  width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.confirmation-card h1 {
+  color: #2e7d32;
+  margin-bottom: 15px;
+}
+
+.confirmation-card h2 {
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.confirmation-details {
+  text-align: left;
+  margin-top: 15px;
+  line-height: 1.8;
+}
+
+.confirmation-message {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #e8f5e9;
+  border-radius: 8px;
+  color: #2e7d32;
+  font-weight: bold;
+}
+
+.continue-btn {
+  margin-top: 25px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2e7d32;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.continue-btn:hover {
+  background-color: #256428;
+}
