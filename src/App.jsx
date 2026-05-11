@@ -80,10 +80,11 @@ function SignupPage() {
       return
     }
   
+    //stores new user's info in data variable
     const data = await signupUser(formData)
   
     if (data.success) {
-      navigate("/confirmation")
+      navigate("/confirmation", { state: { email: formData.email } })
     } else {
       alert(data.message || "Signup failed.")
     }
@@ -147,4 +148,4 @@ function App() {
   )
 }
 
-export default App 
+export default App

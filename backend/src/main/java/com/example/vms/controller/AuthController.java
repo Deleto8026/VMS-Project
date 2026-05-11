@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.vms.service.EmailService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,10 +23,11 @@ public class AuthController {
 
     // This connects the controller to the database layer
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
-    // Constructor injection (Spring automatically provides UserRepository)
-    public AuthController(UserRepository userRepository) {
+    public AuthController(UserRepository userRepository, EmailService emailService) {
         this.userRepository = userRepository;
+        this.emailService = emailService;
     }
 
     @PostMapping("/signup")
@@ -45,8 +47,32 @@ public class AuthController {
         // Save user to database
         userRepository.save(user);
 
+        // Send verification code to their email
+        emailService.sendVerificationCode(user.getEmail(), user.getFirstName());
+
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new AuthResponse(true, "Account created successfully."));
+    }
+
+    @PostMapping("/verify")
+    public ResponseEntity<AuthResponse> verify(@RequestBody Map<String, String> request) {
+
+        String email = request.get("email");
+        String code = request.get("code");
+
+        if (email == null || code == null) {
+            return ResponseEntity.badRequest()
+                    .body(new AuthResponse(false, "Email and code are required."));
+        }
+
+        boolean isValid = emailService.verifyCode(email, code);
+
+        if (isValid) {
+            return ResponseEntity.ok(new AuthResponse(true, "Email verified successfully."));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new AuthResponse(false, "Invalid or expired code."));
+        }
     }
 
     // This method handles login requests from the frontend

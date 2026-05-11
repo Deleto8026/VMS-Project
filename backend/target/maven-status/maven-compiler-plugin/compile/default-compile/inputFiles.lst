@@ -8,3 +8,4 @@
 /Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/model/User.java
 /Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/repository/RegistrationRepository.java
 /Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/repository/UserRepository.java
+/Users/dimashumilov/Documents/GitHub/VMS-Project/backend/src/main/java/com/example/vms/service/EmailService.java

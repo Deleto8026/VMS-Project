@@ -46,6 +46,29 @@ public class UserRepository {
         return users.isEmpty() ? null : users.get(0);
     }
 
+    // Save verification code for a user
+    public void saveVerificationCode(String email, String code) {
+        String sql = "UPDATE users SET verification_code = ? WHERE email = ?";
+        jdbcTemplate.update(sql, code, email);
+    }
+
+    // Get verification code for a user
+    public String getVerificationCode(String email) {
+        String sql = "SELECT verification_code FROM users WHERE email = ?";
+        List<String> results = jdbcTemplate.query(
+            sql,
+            (rs, rowNum) -> rs.getString("verification_code"),
+            email
+        );
+        return results.isEmpty() ? null : results.get(0);
+    }
+
+    // Clear verification code after successful verification
+    public void clearVerificationCode(String email) {
+        String sql = "UPDATE users SET verification_code = NULL WHERE email = ?";
+        jdbcTemplate.update(sql, email);
+    }
+
     // Insert new user into database
     public void save(User user) {
         String sql = "INSERT INTO users (first_name, last_name, username, email, password) " +
