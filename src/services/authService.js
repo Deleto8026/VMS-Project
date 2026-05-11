@@ -43,4 +43,5 @@ export async function logoutUser() {
       message: "Unable to connect to the server.",
     };
   }
+
 }

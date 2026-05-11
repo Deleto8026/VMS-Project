@@ -45,4 +45,5 @@ public class UserRepository {
         // Return first user if found, otherwise null
         return users.isEmpty() ? null : users.get(0);
     }
+   
 }
