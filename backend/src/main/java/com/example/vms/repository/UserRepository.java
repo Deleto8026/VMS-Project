@@ -45,9 +45,6 @@ public class UserRepository {
         // Return first user if found, otherwise null
         return users.isEmpty() ? null : users.get(0);
     }
-<<<<<<< HEAD
-   
-=======
 
     // Save verification code for a user
     public void saveVerificationCode(String email, String code) {
@@ -86,5 +83,4 @@ public class UserRepository {
             user.getPassword()
         );
     }
->>>>>>> 61d006a8533e556d39de9c98a96a5cfa77bf29c8
 }

@@ -117,8 +117,12 @@ public class AuthController {
         safeUser.put("username", user.getUsername());
         safeUser.put("email", user.getEmail());
 
-        // Return success response to frontend
+        // Send verification code to their email
+        emailService.sendVerificationCode(user.getEmail(), user.getFirstName());
+
         return ResponseEntity.ok(new AuthResponse(true, "Login successful.", safeUser));
+        // Return success response to frontend
+       // return ResponseEntity.ok(new AuthResponse(true, "Login successful.", safeUser));
     }
 
     // This method handles logout requests
@@ -131,6 +135,4 @@ public class AuthController {
 
         // Return success message
         return ResponseEntity.ok(new AuthResponse(true, "Logged out successfully."));
-    }
-
-}
+    }}

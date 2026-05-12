@@ -8,6 +8,7 @@ import Confirmation from "./pages/Confirmation"
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import Logout from "./pages/Logout"
+import LoginConfirmation from "./pages/LoginConfirmation"
 import { Routes, Route, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { signupUser } from "./services/authService"
@@ -139,6 +140,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/confirmation" element={<Confirmation />} />
+          <Route path="/login-confirmation" element={<LoginConfirmation />} />
           <Route path="/registration-success" element={<RegistrationSuccess />} />
         </Routes>
       </main>
@@ -148,8 +150,4 @@ function App() {
   )
 }
 
-<<<<<<< HEAD
 export default App  
-=======
-export default App
->>>>>>> 61d006a8533e556d39de9c98a96a5cfa77bf29c8
