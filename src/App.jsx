@@ -1,4 +1,3 @@
-import './App.css'
 import Navbar from './components/navbar'
 import Footer from './components/footer'
 import Events from "./pages/Events"
@@ -16,6 +15,8 @@ import { Routes, Route, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { signupUser } from "./services/authService"
 import RegistrationSuccess from "./pages/RegistrationSuccess"
+import './App.css'
+
 // Signup Page
 function SignupPage() {
   const navigate = useNavigate()
@@ -27,6 +28,8 @@ function SignupPage() {
     email: "",
     password: "",
   })
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -85,7 +88,9 @@ function SignupPage() {
     }
   
     //stores new user's info in data variable
+    setLoading(true)
     const data = await signupUser(formData)
+    setLoading(false)
   
     if (data.success) {
       navigate("/confirmation", { state: { email: formData.email } })
@@ -119,8 +124,9 @@ function SignupPage() {
             type="button"
             className="sign-up"
             onClick={handleSubmit}
+            disabled={loading}
           >
-            Sign Up
+            {loading ? "Signing up..." : "Sign Up"}
           </button>
         </div>
       </div>

@@ -119,6 +119,12 @@ button{
   transition: background-color 0.1s ease;
 }
 
+.sign-up:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .signup-confirmation-container{
   display: flex;
   flex-direction: column;

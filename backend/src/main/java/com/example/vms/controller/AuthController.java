@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.vms.service.EmailService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class AuthController {
     // This connects the controller to the database layer
     private final UserRepository userRepository;
     private final EmailService emailService;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public AuthController(UserRepository userRepository, EmailService emailService) {
         this.userRepository = userRepository;
@@ -44,10 +46,9 @@ public class AuthController {
                     .body(new AuthResponse(false, "All fields are required."));
         }
 
-        // Save user to database
-        userRepository.save(user);
-
         // Send verification code to their email
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
         emailService.sendVerificationCode(user.getEmail(), user.getFirstName());
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -100,7 +101,7 @@ public class AuthController {
 
         // Check if password matches 
         // Note: This should be replaced with hashing later for security
-        if (!request.getPassword().equals(user.getPassword())) {
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new AuthResponse(false, "Invalid password."));
         }
