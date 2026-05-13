@@ -19,7 +19,7 @@ function Confirmation() {
     const data = await verifyUser(email, code)
 
     if (data.success) {
-      navigate("/events")
+      navigate("/Login")
     } else {
       alert(data.message || "Invalid code. Please try again.")
     }
