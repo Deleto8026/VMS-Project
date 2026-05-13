@@ -8,6 +8,9 @@ import Confirmation from "./pages/Confirmation"
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import Logout from "./pages/Logout"
+import ForgotPassword from "./pages/ForgotPassword"
+import ForgotPasswordSent from "./pages/ForgotPasswordSent"
+import ForgotPasswordConfirm from "./pages/ForgotPasswordConfirm"
 import LoginConfirmation from "./pages/LoginConfirmation"
 import { Routes, Route, useNavigate } from "react-router-dom"
 import { useState } from "react"
@@ -142,6 +145,9 @@ function App() {
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/login-confirmation" element={<LoginConfirmation />} />
           <Route path="/registration-success" element={<RegistrationSuccess />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgot-password-sent" element={<ForgotPasswordSent />} />
+          <Route path="/forgot-password-confirm" element={<ForgotPasswordConfirm />} />
         </Routes>
       </main>
 
