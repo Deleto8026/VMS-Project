@@ -27,8 +27,8 @@ function Dashboard() {
 
   return (
     <div className="dash-page">
-      <header className="dash-topbar">
-        <div
+      {/*<header className="dash-topbar">
+         <div
           className="dash-topbar-brand"
           onClick={() => navigate("/dashboard")}
         >
@@ -81,7 +81,7 @@ function Dashboard() {
             Log Out
           </button>
         </div>
-      </header>
+      </header> */}
 
       <main className="dash-main">
         <h1 className="dash-title">Volunteer Management System</h1>

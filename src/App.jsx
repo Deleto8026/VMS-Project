@@ -131,7 +131,7 @@ function SignupPage() {
 function App() {
   return (
     <div className="app-container">
-      <Navbar></Navbar>
+      <Navbar />
 
       <main className="main-content">
         <Routes>
