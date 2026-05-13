@@ -1,6 +1,7 @@
 CREATE TABLE users 
 (
   user_id INT AUTO_INCREMENT PRIMARY KEY,
+  student_id VARCHAR(5) UNIQUE,
   first_name VARCHAR(50),
   last_name VARCHAR(50),
   username VARCHAR(25),
