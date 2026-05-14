@@ -1,5 +1,6 @@
 const API_BASE_URL = "http://localhost:8080/api/auth";
 
+//Ouiam- handles user login request (authentication)
 export async function loginUser(formData) {
   try {
     const response = await fetch(`${API_BASE_URL}/login`, {
@@ -22,6 +23,7 @@ export async function loginUser(formData) {
   }
 }
 
+//Ouiam- handles user logout (clears backend session)
 export async function logoutUser() {
   try {
     const response = await fetch(`${API_BASE_URL}/logout`, {
@@ -43,9 +45,9 @@ export async function logoutUser() {
       message: "Unable to connect to the server.",
     };
   }
-
 }
-//dima - sign up method
+
+// dima - sign up method (creates new user account)
 export async function signupUser(formData) {
   try {
     const response = await fetch(`${API_BASE_URL}/signup`, {
@@ -68,7 +70,7 @@ export async function signupUser(formData) {
   }
 }
 
-//dima - verifies user's 6-digit code during sign up
+// dima - verifies user's 6-digit code during sign up or login confirmation
 export async function verifyUser(email, code) {
   try {
     const response = await fetch(`${API_BASE_URL}/verify`, {
@@ -89,8 +91,10 @@ export async function verifyUser(email, code) {
       message: "Unable to connect to the server.",
     };
   }
+}
 
-  export async function checkAuth() {
+//Ouiam checks if user is already logged in (authorization check)
+export async function checkAuth() {
   try {
     const response = await fetch(`${API_BASE_URL}/check-auth`, {
       method: "GET",
@@ -99,10 +103,10 @@ export async function verifyUser(email, code) {
 
     return await response.json();
   } catch (error) {
+    console.error("Check auth failed:", error);
     return {
       success: false,
       message: "Unable to check login status.",
     };
   }
-}
 }
