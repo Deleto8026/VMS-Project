@@ -629,18 +629,17 @@ body {
 
 .login-card {
   width: 380px;
-  background-color: #f7a500;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  background-color: #ffa500;
   padding: 30px;
   text-align: center;
+  border-radius: 15px;
 }
 
 /* Title */
-.login-title {
-  margin-bottom: 22px;
-  font-size: 20px;
-  font-weight: 700;
-  color: #000;
+.login-title{
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 0.01em;
 }
 
 /* Form */
