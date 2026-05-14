@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
+import { useEffect } from "react";
 import "../App.css";
 
 function Login() {
   const navigate = useNavigate();
+
+  //if already logged in, redirect to events
+  //useEffect part fixes the issue where each keystroke updates the page
+  /*useEffect(() => {
+    const storedUser = localStorage.getItem("user")
+    if (storedUser) {
+      navigate("/events")
+    }
+  }, [])*/
 
   const [formData, setFormData] = useState({
     identifier: "", // can be username OR email

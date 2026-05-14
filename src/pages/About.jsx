@@ -11,7 +11,7 @@ function About() {
           <div className="about-text">
             <h3>A Quick Intro</h3>
             <p>
-              We’re a team of passionate individuals — former nonprofit workers,
+              We are a team of passionate individuals — former nonprofit workers,
               technologists, and volunteers ourselves — who saw firsthand how
               outdated systems and scattered spreadsheets were slowing down the
               very organizations trying to do the most good. So we built

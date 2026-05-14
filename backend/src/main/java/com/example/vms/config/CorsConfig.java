@@ -27,8 +27,8 @@ public class CorsConfig {
                 // Apply CORS rules to all API routes starting with /api/
                 registry.addMapping("/api/**")
 
-                        // Allow requests from React frontend (running on port 5173)
-                        .allowedOrigins("http://localhost:5173")
+                        // Allow requests from local development frontends
+                        .allowedOrigins("http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173", "http://127.0.0.1:3000")
 
                         // Allow these HTTP methods
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")

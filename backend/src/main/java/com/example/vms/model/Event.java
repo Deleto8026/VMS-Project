@@ -1,92 +1,74 @@
 package com.example.vms.model;
 
-import jakarta.persistence.*;
+// This class represents the events table in the database.
+// Each object of this class is one event from the database.
 
-@Entity
-@Table(name = "events")
-public class Event {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "event_id")
-    private Integer id;
-
-    @Column(name = "event_name")
-    private String title;
-
-    @Column(name = "description")
+public class Event 
+{
+    private Integer eventId;
+    private String eventName;
     private String description;
-
-    @Column(name = "event_date")
     private String eventDate;
-
-    @Column(name = "event_time")
-    private String eventTime;
-
-    @Column(name = "location")
     private String location;
+    private Integer userId;
 
-    @Column(name = "image")
-    private String image;
-
-    public Event() {}
-
-    public Integer getId() {
-        return id;
+    public Integer getEventId() 
+    {
+        return eventId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEventId(Integer eventId) 
+    {
+        this.eventId = eventId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getEventName() 
+    {
+        return eventName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setEventName(String eventName) 
+    {
+        this.eventName = eventName;
     }
 
-    public String getDescription() {
+    public String getDescription() 
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description) 
+    {
         this.description = description;
     }
 
-    public String getEventDate() {
+    public String getEventDate() 
+    {
         return eventDate;
     }
 
-    public void setEventDate(String eventDate) {
+    public void setEventDate(String eventDate) 
+    {
         this.eventDate = eventDate;
     }
 
-    public String getEventTime() {
-        return eventTime;
-    }
-
-    public void setEventTime(String eventTime) {
-        this.eventTime = eventTime;
-    }
-
-    public String getLocation() {
+    public String getLocation() 
+    {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(String location) 
+    {
         this.location = location;
     }
 
-    public String getImage() {
-        return image;
+    public Integer getUserId() 
+    {
+        return userId;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setUserId(Integer userId) 
+    {
+        this.userId = userId;
     }
 }
-
-

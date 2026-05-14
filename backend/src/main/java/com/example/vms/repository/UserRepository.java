@@ -21,7 +21,8 @@ public class UserRepository {
     public User findByIdentifier(String identifier) {
 
         // SQL query to search user in database
-        String sql = "SELECT user_id, first_name, last_name, username, email, password, photo " +
+        String sql = "SELECT user_id, first_name, last_name, username, email, password, photo, phone, " +
+                     "birth_date, address, city, state, zip, bio " +
                      "FROM users " +
                      "WHERE email = ? OR username = ? " +
                      "LIMIT 1";
@@ -29,16 +30,7 @@ public class UserRepository {
         // Run query and map result to User object
         List<User> users = jdbcTemplate.query(
             sql,
-            (rs, rowNum) -> {
-                User user = new User();
-                user.setUserId(rs.getInt("user_id"));
-                user.setFirstName(rs.getString("first_name"));
-                user.setLastName(rs.getString("last_name"));
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
-                return user;
-            },
+            (rs, rowNum) -> mapRowToUser(rs),
             identifier, identifier
         );
 
@@ -82,5 +74,75 @@ public class UserRepository {
             user.getEmail(),
             user.getPassword()
         );
+    }
+
+    //reusable method to map a database row to a User object
+    private User mapRowToUser(java.sql.ResultSet rs) throws java.sql.SQLException {
+        User user = new User();
+        user.setUserId(rs.getInt("user_id"));
+        user.setFirstName(rs.getString("first_name"));
+        user.setLastName(rs.getString("last_name"));
+        user.setUsername(rs.getString("username"));
+        user.setEmail(rs.getString("email"));
+        user.setPassword(rs.getString("password"));
+        user.setPhoto(rs.getString("photo"));
+        user.setPhone(rs.getString("phone"));
+        user.setBirthDate(rs.getString("birth_date"));
+        user.setAddress(rs.getString("address"));
+        user.setCity(rs.getString("city"));
+        user.setState(rs.getString("state"));
+        user.setZip(rs.getString("zip"));
+        user.setBio(rs.getString("bio"));
+        return user;
+    }
+
+    //find user by ID
+    public User findById(Integer userId) {
+        String sql = "SELECT user_id, first_name, last_name, username, email, password, photo, phone, " +
+                    "birth_date, address, city, state, zip, bio " +
+                    "FROM users WHERE user_id = ?";
+
+        List<User> users = jdbcTemplate.query(sql, (rs, rowNum) -> mapRowToUser(rs), userId);
+        return users.isEmpty() ? null : users.get(0);
+    }
+
+    //update user profile
+    public void updateProfile(User user) {
+        String sql = "UPDATE users SET first_name = ?, last_name = ?, phone = ?, " +
+                    "birth_date = ?, address = ?, city = ?, state = ?, zip = ?, bio = ? " +
+                    "WHERE user_id = ?";
+
+        jdbcTemplate.update(sql,
+            user.getFirstName(),
+            user.getLastName(),
+            user.getPhone(),
+            user.getBirthDate(),
+            user.getAddress(),
+            user.getCity(),
+            user.getState(),
+            user.getZip(),
+            user.getBio(),
+            user.getUserId()
+        );
+    }
+
+    //find user by email
+    public User findByEmail(String email) {
+        String sql = "SELECT user_id, first_name, last_name, username, email, password, photo, phone, " +
+                    "birth_date, address, city, state, zip, bio " +
+                    "FROM users WHERE email = ? LIMIT 1";
+
+        List<User> users = jdbcTemplate.query(sql, (rs, rowNum) -> mapRowToUser(rs), email);
+        return users.isEmpty() ? null : users.get(0);
+    }
+
+    //find user by username
+    public User findByUsername(String username) {
+        String sql = "SELECT user_id, first_name, last_name, username, email, password, photo, phone, " +
+                    "birth_date, address, city, state, zip, bio " +
+                    "FROM users WHERE username = ? LIMIT 1";
+
+        List<User> users = jdbcTemplate.query(sql, (rs, rowNum) -> mapRowToUser(rs), username);
+        return users.isEmpty() ? null : users.get(0);
     }
 }

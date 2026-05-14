@@ -105,8 +105,8 @@ button{
 }
 .sign-up{
   padding: 10px;
-  margin-top: 30px;
-  margin-bottom: 25px;
+  margin-top: 15px;
+  margin-bottom: 10px;
   background-color: black;
   color: white;
   width: 82%;
@@ -125,6 +125,23 @@ button{
   opacity: 0.6;
 }
 
+.already-have-account {
+  font-size: 15px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.already-have-account a {
+  color: rgb(78, 78, 78);
+  text-decoration: none;
+  font-style: italic;
+}
+
+.already-have-account a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .signup-confirmation-container{
   display: flex;
   flex-direction: column;
@@ -133,7 +150,6 @@ button{
   margin-top: 50px;
   text-align: left;
 }
-
 
 .margin-10{
   margin-top: 10px;
@@ -613,18 +629,18 @@ body {
 
 .login-card {
   width: 380px;
-  background-color: #f7a500;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  background-color: #ffa500;
   padding: 30px;
   text-align: center;
+  border-radius: 15px;
 }
 
 /* Title */
-.login-title {
-  margin-bottom: 22px;
+.login-title{
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: 0.01em;
   font-size: 20px;
-  font-weight: 700;
-  color: #000;
 }
 
 /* Form */
