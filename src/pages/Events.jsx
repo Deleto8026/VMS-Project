@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { checkAuth } from "../services/authService";
 import "../App.css"
 
 const defaultEvents = [
@@ -42,8 +43,18 @@ function Events() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetchEvents()
-  }, [])
+  const verifyLogin = async () => {
+    const data = await checkAuth();
+
+    if (!data.success) {
+      navigate("/login");
+    }
+    // fetch events only if authorized
+    fetchEvents();
+  };
+
+  verifyLogin();
+}, [navigate]);
 
   const fetchEvents = async () => {
     try {

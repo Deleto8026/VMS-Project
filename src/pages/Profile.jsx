@@ -1,8 +1,22 @@
 import '../style.css'
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react";
+import { checkAuth } from "../services/authService";
 
 function Profile() {
   const navigate = useNavigate()
+  
+  useEffect(() => {
+  const verifyLogin = async () => {
+    const data = await checkAuth();
+
+    if (!data.success) {
+      navigate("/login");
+    }
+  };
+
+  verifyLogin();
+}, [navigate]);
 
   const modifyProfile = async () => {
     navigate("/profile-modify")

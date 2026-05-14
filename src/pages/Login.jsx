@@ -21,6 +21,9 @@ function Login() {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
+
   //  Updates state as user types
   const handleChange = (e) => {
     setFormData({
@@ -32,6 +35,8 @@ function Login() {
   //  Handles form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (loading) return;
 
     const { identifier, password } = formData;
 
@@ -70,6 +75,7 @@ function Login() {
       alert("Password must be at least 6 characters.");
       return;
     }
+    setLoading(true);
 
     //  Send login request to backend
     try {
@@ -91,6 +97,8 @@ function Login() {
     } catch (error) {
       console.error("Login error:", error);
       alert("Something went wrong.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,6 +116,7 @@ function Login() {
               placeholder="Enter your username or email" 
               value={formData.identifier}
               onChange={handleChange}
+              autoComplete="off"
             />
 
             <input
@@ -117,14 +126,15 @@ function Login() {
               placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}
+              autoComplete="new-passord"
             />
 
             <a href="/forgot-password" className="login-forgot-password">
               Forgot password?
             </a>
 
-            <button type="submit" className="login-button">
-              Log In
+            <button type="submit" className="login-button" disabled={loading}>
+              {loading ? "Logging in..." : "Log In"}
             </button>
           </form>
         </div>
