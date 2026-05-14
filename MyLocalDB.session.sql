@@ -1,5 +1,7 @@
-CREATE TABLE users (
+CREATE TABLE users 
+(
   user_id INT AUTO_INCREMENT PRIMARY KEY,
+  student_id VARCHAR(5) UNIQUE,
   first_name VARCHAR(50),
   last_name VARCHAR(50),
   username VARCHAR(25),
@@ -16,7 +18,8 @@ CREATE TABLE users (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE events (
+CREATE TABLE events 
+(
   event_id INT AUTO_INCREMENT PRIMARY KEY,
   event_name VARCHAR(100),
   description TEXT,

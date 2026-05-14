@@ -72,7 +72,9 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(data.user));
 
         // Navigate to confirmation page
-        navigate("/confirmation");
+        navigate("/login-confirmation", {
+          state: { email: data.user.email }
+          })
       } else {
         alert(data.message || "Login failed.");
       }

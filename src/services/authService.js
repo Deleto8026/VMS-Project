@@ -43,4 +43,50 @@ export async function logoutUser() {
       message: "Unable to connect to the server.",
     };
   }
+
+}
+//dima - sign up method
+export async function signupUser(formData) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Signup request failed:", error);
+    return {
+      success: false,
+      message: "Unable to connect to the server.",
+    };
+  }
+}
+
+//dima - verifies user's 6-digit code during sign up
+export async function verifyUser(email, code) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/verify`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ email, code }),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Verification request failed:", error);
+    return {
+      success: false,
+      message: "Unable to connect to the server.",
+    };
+  }
 }
