@@ -7,6 +7,14 @@ function Dashboard() {
   const [userName, setUserName] = useState("User");
 
   useEffect(() => {
+  const verifyLogin = async () => {
+    const authData = await checkAuth();
+
+    if (!authData.success) {
+      navigate("/login");
+      return;
+    }
+
     const storedUser = localStorage.getItem("user");
 
     if (storedUser) {
@@ -17,7 +25,10 @@ function Dashboard() {
         console.log("Could not load user data");
       }
     }
-  }, []);
+  };
+
+  verifyLogin();
+}, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");

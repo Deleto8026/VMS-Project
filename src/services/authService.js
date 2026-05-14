@@ -89,4 +89,20 @@ export async function verifyUser(email, code) {
       message: "Unable to connect to the server.",
     };
   }
+
+  export async function checkAuth() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/check-auth`, {
+      method: "GET",
+      credentials: "include",
+    });
+
+    return await response.json();
+  } catch (error) {
+    return {
+      success: false,
+      message: "Unable to check login status.",
+    };
+  }
+}
 }
