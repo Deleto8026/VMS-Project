@@ -1,17 +1,10 @@
-package com.example.vms.model;
+package com.example.vms.dto;
 
-// This class represents the users table in the database.
-// Each object of this class is one user from the database.
+public class ProfileRequest {
 
-public class User {
-
-    private Integer userId;   // unique ID of the user
-    private String firstName; // user's first name
-    private String lastName;  // user's last name
-    private String username;  // username used for login
-    private String email;     // user email
-    private String password;  // user password, stored in DB
-    private String photo;     // profile photo
+    private String firstName;
+    private String lastName;
+    private String email;
     private String phone;
     private String birthDate;
     private String address;
@@ -19,14 +12,7 @@ public class User {
     private String state;
     private String zip;
     private String bio;
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    private String imageUrl;
 
     public String getFirstName() {
         return firstName;
@@ -44,36 +30,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
     public String getPhone() {
@@ -130,5 +92,13 @@ public class User {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
