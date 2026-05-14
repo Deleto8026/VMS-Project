@@ -46,7 +46,18 @@ public class AuthController {
                     .body(new AuthResponse(false, "All fields are required."));
         }
 
-        // Send verification code to their email
+        /*//checks if email is in the db
+        if (userRepository.findByEmail(user.getEmail()) != null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(new AuthResponse(false, "Email already in use."));
+        }
+
+        //checks if the username is in db
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(new AuthResponse(false, "Username already in use."));
+        }*/
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         emailService.sendVerificationCode(user.getEmail(), user.getFirstName());
@@ -110,7 +121,7 @@ public class AuthController {
         session.setAttribute("userId", user.getUserId());
         session.setAttribute("username", user.getUsername());
 
-        // Create safe user object (do NOT send password to frontend)
+        //create safe user object (do NOT send password to frontend)
         Map<String, Object> safeUser = new HashMap<>();
         safeUser.put("userId", user.getUserId());
         safeUser.put("firstName", user.getFirstName());
@@ -118,12 +129,11 @@ public class AuthController {
         safeUser.put("username", user.getUsername());
         safeUser.put("email", user.getEmail());
 
-        // Send verification code to their email
+        //send verification code to their email
         emailService.sendVerificationCode(user.getEmail(), user.getFirstName());
 
+
         return ResponseEntity.ok(new AuthResponse(true, "Login successful.", safeUser));
-        // Return success response to frontend
-       // return ResponseEntity.ok(new AuthResponse(true, "Login successful.", safeUser));
     }
 
 
