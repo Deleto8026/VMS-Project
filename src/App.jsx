@@ -129,8 +129,12 @@ function SignupPage() {
             onClick={handleSubmit}
             disabled={loading}
           >
-            {loading ? "Signing up..." : "Sign Up"}
+            {loading ? "Processing..." : "Sign Up"}
           </button>
+
+          <p className="already-have-account">
+            Already have an account? <a href="/login">Log in</a>
+          </p>
         </div>
       </div>
     </>
