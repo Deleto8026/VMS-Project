@@ -3,6 +3,7 @@ import Footer from './components/footer'
 import Events from "./pages/Events"
 import Details from "./pages/Details"
 import Profile from "./pages/Profile"
+import ProfileModify from "./pages/ProfileModify"
 import Confirmation from "./pages/Confirmation"
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
@@ -147,6 +148,7 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/details/:id" element={<Details />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile-modify" element={<ProfileModify />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
