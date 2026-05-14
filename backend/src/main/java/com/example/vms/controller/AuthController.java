@@ -100,7 +100,7 @@ public class AuthController {
         }
 
         // Check if password matches 
-        // Note: This should be replaced with hashing later for security
+        // Compare entered password with the hashed password stored in the database
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new AuthResponse(false, "Invalid password."));
@@ -126,6 +126,7 @@ public class AuthController {
        // return ResponseEntity.ok(new AuthResponse(true, "Login successful.", safeUser));
     }
 
+
     // This method handles logout requests
     // It listens to POST requests at /api/auth/logout
     @PostMapping("/logout")
@@ -136,4 +137,36 @@ public class AuthController {
 
         // Return success message
         return ResponseEntity.ok(new AuthResponse(true, "Logged out successfully."));
-    }}
+    }
+    
+    // Checks if user is logged in by checking session userId
+    private boolean isLoggedIn(HttpSession session) {
+        return session.getAttribute("userId") != null;
+    }
+
+    // Authorization check route
+    @GetMapping("/check-auth")
+    public ResponseEntity<AuthResponse> checkAuth(HttpSession session) {
+        if (!isLoggedIn(session)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new AuthResponse(false, "User is not logged in."));
+        }
+
+        return ResponseEntity.ok(new AuthResponse(true, "User is logged in."));
+    }
+
+    // protected route for account/profile access
+    @GetMapping("/account")
+    public ResponseEntity<AuthResponse> getAccount(HttpSession session) {
+        if (!isLoggedIn(session)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new AuthResponse(false, "You must log in first."));
+        }
+
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("userId", session.getAttribute("userId"));
+        userInfo.put("username", session.getAttribute("username"));
+
+        return ResponseEntity.ok(new AuthResponse(true, "Authorized user.", userInfo));
+    }
+}

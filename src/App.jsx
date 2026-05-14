@@ -11,6 +11,8 @@ import ForgotPassword from "./pages/ForgotPassword"
 import ForgotPasswordSent from "./pages/ForgotPasswordSent"
 import ForgotPasswordConfirm from "./pages/ForgotPasswordConfirm"
 import LoginConfirmation from "./pages/LoginConfirmation"
+import Partnership from "./pages/Partnership";
+import About from './pages/About'
 import { Routes, Route, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { signupUser } from "./services/authService"
@@ -154,6 +156,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/forgot-password-sent" element={<ForgotPasswordSent />} />
           <Route path="/forgot-password-confirm" element={<ForgotPasswordConfirm />} />
+          <Route path="/partnerships" element={<Partnership />} />
+          <Route path="/about" element={<About/>} />
         </Routes>
       </main>
 

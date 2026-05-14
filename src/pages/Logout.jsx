@@ -6,13 +6,16 @@ export default function Logout() {
   const navigate = useNavigate();
 
   const handleGoToLogin = async () => {
-    try {
-      await logoutUser(); // call backend
-      navigate("/login");
-    } catch (error) {
-      console.error("Logout failed");
-    }
-  };
+  try {
+    await logoutUser(); // call backend
+  } catch (error) {
+    console.error("Logout failed");
+  } finally {
+    localStorage.removeItem("user");
+    localStorage.removeItem("verificationEmail");
+    navigate("/login");
+  }
+};
 
   return (
     <div className="logout-page">
